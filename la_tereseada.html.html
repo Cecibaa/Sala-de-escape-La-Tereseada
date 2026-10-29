@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f0df">
+<title>La Tereseada · Diploma matemático</title>
+<style>
+:root{--paper:#fbf4e5;--ink:#5d4938;--brown:#76503a;--gold:#c69a39;--sage:#a9bd9b;--rose:#f2cbd0;--sky:#c9e5f1;--green:#d5e4c8;--yellow:#f5e4a5}
+*{box-sizing:border-box}
+body{margin:0;background:#eee5d5;color:var(--ink);font-family:ui-rounded,"Trebuchet MS",system-ui,sans-serif;padding:20px 12px 36px}
+.app{width:min(100%,760px);margin:auto}
+header{text-align:center;margin:0 auto 18px}
+.eyebrow{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:#8b795d;font-weight:800}
+h1{font-family:Georgia,serif;font-weight:normal;font-size:clamp(2rem,8vw,3.2rem);margin:.2em 0;color:#76503a}
+header p{margin:0 auto;max-width:520px;line-height:1.5;font-size:.96rem}
+.panel{background:#fffaf0;border:1px solid #e2d4b8;border-radius:22px;padding:16px;box-shadow:0 8px 24px #5b462015;margin:14px 0}
+label{display:block;font-weight:800;margin-bottom:8px}
+input{width:100%;padding:14px 15px;border:2px solid #e4d4b5;border-radius:13px;font:inherit;font-size:1rem;background:#fffdf7;color:var(--ink);outline-offset:2px}
+input:focus{border-color:#b79555}
+.hint{font-size:.82rem;color:#82735f;line-height:1.45;margin:8px 0 0}
+.diploma-wrap{padding:0;background:transparent;border:0;box-shadow:none}
+.diploma{position:relative;overflow:hidden;text-align:center;background:var(--paper);border:3px double #c8a65f;border-radius:8px;padding:clamp(16px,4.5vw,34px) clamp(12px,4vw,30px) 22px;box-shadow:0 8px 25px #55432b20;isolation:isolate}
+.diploma:before{content:"";position:absolute;inset:8px;border:1px solid #d8c49a;pointer-events:none;z-index:-1}
+.leaf{position:absolute;font-size:clamp(25px,7vw,42px);color:#8aa27d;opacity:.8;line-height:1}
+.leaf.tl{top:13px;left:13px;transform:rotate(-30deg)}.leaf.tr{top:13px;right:13px;transform:scaleX(-1) rotate(-30deg)}
+.leaf.bl{bottom:12px;left:14px;transform:rotate(25deg)}.leaf.br{bottom:12px;right:14px;transform:scaleX(-1) rotate(25deg)}
+.heart{color:#caa044;font-size:20px;display:inline-block;margin:0 5px}
+.school{font-size:clamp(.62rem,2.7vw,.82rem);font-weight:800;letter-spacing:.09em;text-transform:uppercase;line-height:1.5;margin:8px 18px 3px}
+.event{font-family:Georgia,serif;font-size:clamp(1.8rem,8vw,3rem);color:#8b6345;line-height:1.1;margin:4px 0}
+.sub{font-size:clamp(.66rem,2.7vw,.9rem);letter-spacing:.13em;text-transform:uppercase;color:#8b795d;font-weight:800}
+.saint{width:min(48%,205px);height:auto;display:block;margin:8px auto 4px}
+.congrats{font-family:Georgia,serif;font-size:clamp(1.25rem,5vw,1.8rem);margin:3px 0 7px;color:#76503a}
+.student{font-family:Georgia,serif;font-size:clamp(1.5rem,7vw,2.45rem);font-weight:bold;color:#6f8b68;overflow-wrap:anywhere;line-height:1.15;margin:8px 0 12px;min-height:1.15em}
+.message{font-family:Georgia,serif;font-size:clamp(.9rem,3.5vw,1.05rem);line-height:1.55;max-width:480px;margin:0 auto 14px}
+.values{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin:12px auto 16px;max-width:460px}
+.pill{border-radius:999px;padding:7px 12px;font-size:clamp(.72rem,2.8vw,.86rem);font-weight:800;border:1px solid #8c77522b}
+.pink{background:var(--rose)}.blue{background:var(--sky)}.green{background:var(--green)}.yellow{background:var(--yellow)}
+.footer{font-size:.72rem;line-height:1.5;color:#8b795d;margin-top:7px}
+.controls{display:grid;grid-template-columns:1fr;gap:10px}
+button{border:0;border-radius:13px;padding:14px 16px;font:inherit;font-weight:800;cursor:pointer;min-height:48px;transition:transform .12s,filter .12s}
+button:active{transform:scale(.985)}button:focus-visible{outline:3px solid #b79555;outline-offset:3px}
+.primary{background:#718a68;color:white}.secondary{background:#eadbbd;color:#5d4938}.tertiary{background:#f4e9d4;color:#6e593e;border:1px solid #deca9f}
+.status{font-size:.86rem;line-height:1.45;margin:10px 0 0;min-height:1.2em;color:#647c5b}
+.qr-layout{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+#qrcode{background:white;padding:10px;border-radius:12px;min-height:20px;max-width:100%}
+#qrcode img,#qrcode canvas{display:block;max-width:100%;height:auto!important;margin:auto}
+.qrurl{overflow-wrap:anywhere;font-size:.78rem;color:#82735f}
+footer{text-align:center;font-size:.8rem;color:#82735f;padding:10px}
+@media(min-width:560px){body{padding-top:30px}.controls{grid-template-columns:1fr 1fr}.qr-layout{flex-direction:row;text-align:left;align-items:center;justify-content:center}#qrcode{flex-shrink:0}}
+@media(max-width:360px){body{padding:12px 7px}.panel{padding:12px}.diploma{padding-left:10px;padding-right:10px}.pill{padding:6px 9px}.school{letter-spacing:.05em}}
+@media print{body{background:white;padding:0}.app>header,.input-panel,.action-panel,.qr-panel,footer{display:none!important}.app{width:100%}.diploma-wrap{margin:0}.diploma{box-shadow:none;border-radius:0}}
+</style>
+</head>
+<body>
+<main class="app">
+<header>
+  <div class="eyebrow">Una aventura de ingenio y valores</div>
+  <h1>La Tereseada <span aria-hidden="true">♡</span></h1>
+  <p>¡Resolviste los desafíos de la Sala de Escape Matemática! Personalizá tu diploma y guardá este recuerdo.</p>
+</header>
+
+<section class="panel input-panel">
+  <label for="studentName">Nombre del/de la estudiante</label>
+  <input id="studentName" type="text" maxlength="70" autocomplete="name" placeholder="Escribí tu nombre aquí…" aria-describedby="nameHint">
+  <p id="nameHint" class="hint">El nombre se actualizará automáticamente en el diploma.</p>
+</section>
+
+<section class="diploma-wrap" aria-label="Vista previa del diploma">
+<div class="diploma" id="diploma">
+  <span class="leaf tl" aria-hidden="true">❧</span><span class="leaf tr" aria-hidden="true">❧</span>
+  <div class="school">Colegio José Manuel Estrada<br>Departamento de Matemática</div>
+  <div class="sub">Diploma de felicitaciones</div>
+  <div class="event">La Tereseada</div>
+  <div class="heart" aria-hidden="true">♥</div><span style="font-size:.76rem;letter-spacing:.12em;color:#9a845f">SALA DE ESCAPE MATEMÁTICA</span><span class="heart" aria-hidden="true">♥</span>
+  <svg class="saint" id="saintArt" viewBox="0 0 240 245" role="img" aria-label="Ilustración de Santa Teresa con aureola, hábito marrón, libro y flores blancas">
+    <ellipse cx="120" cy="229" rx="65" ry="8" fill="#e7d9b9"/>
+    <circle cx="120" cy="62" r="42" fill="none" stroke="#d8ad4c" stroke-width="7"/>
+    <circle cx="120" cy="62" r="35" fill="#f5d98a" opacity=".25"/>
+    <path d="M65 220 Q67 148 86 111 Q97 95 120 96 Q143 95 154 111 Q173 148 175 220Z" fill="#76503a" stroke="#5f402f" stroke-width="2"/>
+    <path d="M91 105 Q120 130 149 105 L162 220 L78 220Z" fill="#8a6145"/>
+    <path d="M101 100 L120 127 L139 100 L131 155 L120 168 L109 155Z" fill="#f8f0df"/>
+    <path d="M88 46 Q87 18 120 18 Q153 18 152 46 L148 88 Q141 106 120 108 Q99 106 92 88Z" fill="#fffaf0" stroke="#e4d8c4" stroke-width="2"/>
+    <path d="M88 49 Q89 15 120 15 Q151 15 152 49 Q141 33 128 35 Q107 37 88 49Z" fill="#fffdf6" stroke="#e4d8c4" stroke-width="2"/>
+    <ellipse cx="108" cy="64" rx="3" ry="4" fill="#604737"/><ellipse cx="132" cy="64" rx="3" ry="4" fill="#604737"/>
+    <path d="M111 79 Q120 86 129 79" fill="none" stroke="#c47c70" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="100" cy="75" r="5" fill="#e8b4a6" opacity=".65"/><circle cx="140" cy="75" r="5" fill="#e8b4a6" opacity=".65"/>
+    <path d="M92 117 Q77 132 87 153 L110 177 L122 164 L104 141Z" fill="#76503a"/>
+    <path d="M148 117 Q164 132 153 153 L137 174 L125 162 L140 140Z" fill="#76503a"/>
+    <path d="M94 145 L133 135 L146 169 L107 181Z" fill="#ead9ac" stroke="#a78a54" stroke-width="2"/>
+    <path d="M100 148 L134 140 L140 164 L108 173Z" fill="#fff8e6"/>
+    <path d="M108 153 L130 147 M110 160 L133 154 M112 167 L135 161" stroke="#c3a66d" stroke-width="1.5"/>
+    <path d="M166 211 Q177 188 174 164" stroke="#6e9866" stroke-width="3" fill="none"/>
+    <path d="M174 190 Q192 179 194 192 Q184 201 174 190 M174 202 Q157 188 155 202 Q165 211 174 202" fill="#9eb78e"/>
+    <g fill="#fffdf7" stroke="#d8d0b9" stroke-width="1"><ellipse cx="174" cy="160" rx="5" ry="12"/><ellipse cx="163" cy="165" rx="5" ry="11" transform="rotate(-45 163 165)"/><ellipse cx="185" cy="165" rx="5" ry="11" transform="rotate(45 185 165)"/><ellipse cx="174" cy="171" rx="5" ry="11"/><ellipse cx="174" cy="165" rx="5" ry="6" fill="#e6c66c"/></g>
+    <path d="M71 213 Q62 194 72 181" stroke="#6e9866" stroke-width="3" fill="none"/>
+    <path d="M70 199 Q51 186 51 201 Q60 211 70 199 M69 207 Q87 190 89 205 Q79 215 69 207" fill="#9eb78e"/>
+    <g fill="#fffdf7" stroke="#d8d0b9" stroke-width="1"><ellipse cx="72" cy="179" rx="5" ry="11"/><ellipse cx="62" cy="184" rx="5" ry="10" transform="rotate(-45 62 184)"/><ellipse cx="82" cy="184" rx="5" ry="10" transform="rotate(45 82 184)"/><ellipse cx="72" cy="190" rx="5" ry="10"/><ellipse cx="72" cy="184" rx="4" ry="5" fill="#e6c66c"/></g>
+    <path d="M119 126 L119 139" stroke="#d9b95e" stroke-width="2"/>
+    <path d="M114 133 L124 133" stroke="#d9b95e" stroke-width="2"/>
+  </svg>
+  <div class="congrats">¡Felicitaciones!</div>
+  <div class="student" id="displayName">¡Este diploma es para vos!</div>
+  <p class="message">Completaste la Sala de Escape Matemática usando tu ingenio, trabajando con otros y descubriendo que cada desafío también nos invita a vivir nuestros valores.</p>
+  <div class="values" aria-label="Valores destacados">
+    <span class="pill pink">♡ Honestidad</span>
+    <span class="pill blue">✦ Acción</span>
+    <span class="pill green">❀ Perseverancia</span>
+    <span class="pill yellow">⚖ Justicia</span>
+  </div>
+  <div class="heart" aria-hidden="true">♥ ♥ ♥</div>
+  <div class="footer">Con cariño, Colegio José Manuel Estrada · Departamento de Matemática</div>
+  <span class="leaf bl" aria-hidden="true">❧</span><span class="leaf br" aria-hidden="true">❧</span>
+</div>
+</section>
+
+<section class="panel action-panel">
+  <div class="controls">
+    <button class="primary" id="downloadBtn">⬇ Descargar Diploma (PNG)</button>
+    <button class="secondary" id="mailBtn">✉ Enviar por Mail</button>
+    <button class="tertiary" id="copyBtn">▣ Copiar felicitación</button>
+    <button class="tertiary" id="shareBtn">↗ Compartir diploma</button>
+  </div>
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+  <p class="hint">En algunos celulares, la imagen se abrirá en una pestaña nueva: mantenela presionada para guardarla. El correo se abre en tu aplicación de email; deberás adjuntar el PNG manualmente.</p>
+</section>
+
+<section class="panel qr-panel">
+  <h2 style="font-family:Georgia,serif;font-weight:normal;margin:0 0 8px">Código QR de La Tereseada</h2>
+  <p class="hint" style="margin:0 0 14px">Generá un QR con la dirección de esta página para proyectarla o imprimirla. Para que otras personas accedan, primero publicá este archivo en una web y pegá aquí su URL pública.</p>
+  <label for="pageUrl">URL pública del diploma</label>
+  <input id="pageUrl" type="url" inputmode="url" placeholder="https://tu-colegio.edu.ar/tereseada.html">
+  <div class="qr-layout" style="margin-top:14px">
+    <div id="qrcode" aria-label="Código QR generado"></div>
+    <div>
+      <button class="primary" id="qrBtn">Generar código QR</button>
+      <button class="tertiary" id="qrDownloadBtn" style="margin-top:8px;width:100%">Guardar QR (PNG)</button>
+      <p class="qrurl" id="qrInfo">El QR se generará con la URL que ingreses.</p>
+    </div>
+  </div>
+</section>
+<footer>Hecho para celebrar el ingenio, la colaboración y los valores. ♡</footer>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(() => {
+ const nameInput=document.getElementById('studentName');
+ const displayName=document.getElementById('displayName');
+ const status=document.getElementById('status');
+ const diploma=document.getElementById('diploma');
+ const pageUrl=document.getElementById('pageUrl');
+ const messageFor=(name)=>`¡Felicitaciones${name?' '+name:''}! Completaste La Tereseada, la Sala de Escape Matemática del Colegio José Manuel Estrada - Departamento de Matemática. ¡Celebramos tu ingenio y los valores de Honestidad, Acción, Perseverancia y Justicia!`;
+ const studentName=()=>nameInput.value.trim();
+ nameInput.addEventListener('input',()=>{displayName.textContent=studentName()||'¡Este diploma es para vos!';});
+ function say(t){status.textContent=t;}
+ function loadScript(src){return new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src;s.onload=resolve;s.onerror=reject;document.head.appendChild(s);});}
+ async function makeCanvas(){
+   if(!window.html2canvas) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+   return await window.html2canvas(diploma,{scale:3,backgroundColor:'#fbf4e5',useCORS:true,logging:false});
+ }
+ function downloadCanvas(canvas,filename){
+   canvas.toBlob(blob=>{
+     if(!blob){say('No se pudo preparar el archivo. Probá con otro navegador.');return;}
+     const url=URL.createObjectURL(blob);
+     const a=document.createElement('a');a.href=url;a.download=filename;a.rel='noopener';document.body.appendChild(a);a.click();a.remove();
+     setTimeout(()=>URL.revokeObjectURL(url),15000);
+     say('¡Diploma listo! Si el celular no lo descargó automáticamente, se abrirá la imagen para guardarla.');
+   },'image/png');
+ }
+ document.getElementById('downloadBtn').addEventListener('click',async()=>{
+   say('Preparando tu diploma…');
+   try{const canvas=await makeCanvas();downloadCanvas(canvas,`Diploma-La-Tereseada-${(studentName()||'estudiante').replace(/[^a-z0-9áéíóúüñ-]+/gi,'-')}.png`);}
+   catch(e){try{const canvas=document.createElement('canvas');canvas.width=1200;canvas.height=1500;const c=canvas.getContext('2d');c.fillStyle='#fbf4e5';c.fillRect(0,0,1200,1500);c.fillStyle='#76503a';c.textAlign='center';c.font='bold 48px Georgia';c.fillText('La Tereseada',600,150);c.font='36px sans-serif';c.fillText('Colegio José Manuel Estrada',600,220);c.fillText('¡Felicitaciones!',600,850);c.font='bold 54px Georgia';c.fillText((studentName()||'¡Este diploma es para vos!').slice(0,28),600,950);c.font='26px sans-serif';['Completaste la Sala de Escape Matemática','Honestidad · Acción · Perseverancia · Justicia'].forEach((t,i)=>c.fillText(t,600,1030+i*55));downloadCanvas(canvas,'Diploma-La-Tereseada.png');say('Se descargó una versión simplificada porque la captura completa no estuvo disponible.');}catch(_){say('No se pudo generar la imagen. Probá abrir el archivo con conexión a internet y volver a intentar.');}}
+ });
+ document.getElementById('mailBtn').addEventListener('click',()=>{
+   const name=studentName();const subject=encodeURIComponent('¡Felicitaciones por completar La Tereseada!');
+   const body=encodeURIComponent(messageFor(name)+'\n\nAdjuntá a este correo la imagen PNG del diploma descargado.');
+   window.location.href=`mailto:?subject=${subject}&body=${body}`;
+ });
+ document.getElementById('copyBtn').addEventListener('click',async()=>{
+   const txt=messageFor(studentName());
+   try{await navigator.clipboard.writeText(txt);say('¡Texto copiado! Ya podés pegarlo en un correo o mensaje.');}
+   catch(e){const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();const ok=document.execCommand('copy');ta.remove();say(ok?'¡Texto copiado!':'No se pudo copiar automáticamente. Texto: '+txt);}
+ });
+ document.getElementById('shareBtn').addEventListener('click',async()=>{
+   try{const canvas=await makeCanvas();const blob=await new Promise(r=>canvas.toBlob(r,'image/png'));const file=new File([blob],`Diploma-La-Tereseada.png`,{type:'image/png'});
+     if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'Mi diploma de La Tereseada',text:messageFor(studentName()),files:[file]});}
+     else if(navigator.share){await navigator.share({title:'La Tereseada',text:messageFor(studentName())});}
+     else{say('Tu navegador no ofrece compartir directamente. Usá “Descargar Diploma (PNG)”.');}
+   }catch(e){if(e.name!=='AbortError')say('No se pudo abrir el menú para compartir. Probá descargar el PNG.');}
+ });
+ let qr=null;
+ document.getElementById('qrBtn').addEventListener('click',()=>{
+   const url=pageUrl.value.trim();const box=document.getElementById('qrcode');
+   if(!url||!/^https?:\/\//i.test(url)){document.getElementById('qrInfo').textContent='Ingresá una URL pública válida que comience con https:// o http://.';return;}
+   if(!window.QRCode){document.getElementById('qrInfo').textContent='No se pudo cargar la librería QR. Verificá tu conexión a internet.';return;}
+   box.innerHTML='';qr=new QRCode(box,{text:url,width:220,height:220,colorDark:'#3e382e',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.H});
+   document.getElementById('qrInfo').textContent='QR listo para esta dirección: '+url;
+ });
+ document.getElementById('qrDownloadBtn').addEventListener('click',()=>{
+   const box=document.getElementById('qrcode');const canvas=box.querySelector('canvas');const img=box.querySelector('img');
+   let data=canvas?canvas.toDataURL('image/png'):img?img.src:null;
+   if(!data){document.getElementById('qrInfo').textContent='Primero generá el código QR.';return;}
+   const a=document.createElement('a');a.href=data;a.download='QR-La-Tereseada.png';document.body.appendChild(a);a.click();a.remove();
+ });
+ if(location.protocol==='http:'||location.protocol==='https:')pageUrl.value=location.href.split('#')[0];
+})();
+</script>
+</body>
+</html>
